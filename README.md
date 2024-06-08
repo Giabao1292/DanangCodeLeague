@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+#include <set>
+#include <vector>
+using namespace std;
+using ll = long long;
+void solve()
+{
+    int n, r, q;
+    double p;
+    cin >> n >> r >> q >> p;
+    vector<pair<int, int>> v;
+    for (int i = 0; i < r; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        v.push_back({x, y});
+    }
+    sort(v.begin(), v.end());
+    int soYeuCau = 0;
+    int index = 0;
+    vector<int> check;
+    for (int i = 0; i < v.size(); i++)
+    {
+        while (check.size() > 0 && v[i].first >= check[0])
+        {
+            check.erase(check.begin());
+            q++;
+        }
+        if (q != 0)
+        {
+            q--;
+            check.push_back(v[i].second);
+            soYeuCau++;
+        }
+    }
+    cout << soYeuCau << "/" << r << ": ";
+    double result = 1.0 * 100 - ((soYeuCau * 1.0 / r) * 100);
+    if (result > p)
+    {
+        cout << "Yes" << endl;
+    }
+    else
+    {
+        cout << "No" << endl;
+    }
+}
+int main()
+{
+    solve();
+}
