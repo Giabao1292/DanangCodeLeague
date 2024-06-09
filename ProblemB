@@ -19,10 +19,10 @@ void solve()
     sort(v.begin(), v.end());
     int soYeuCau = 0;
     int index = 0;
-    vector<int> check;
+    multiset<int> check;
     for (int i = 0; i < v.size(); i++)
     {
-        while (check.size() > 0 && v[i].first >= check[0])
+        while (check.size() > 0 && v[i].first >= *(check.begin()))
         {
             check.erase(check.begin());
             q++;
@@ -30,7 +30,7 @@ void solve()
         if (q != 0)
         {
             q--;
-            check.push_back(v[i].second);
+            check.insert(v[i].second);
             soYeuCau++;
         }
     }
